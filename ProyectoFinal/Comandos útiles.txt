@@ -1,0 +1,14 @@
+comandos útiles del prompt
+
+# Crear Proyecto / App
+django-admin startproject ##NAME##
+python manage.py startapp ##NAME##
+python manage.py migrate
+
+# Levantar server
+python manage.py runserver
+
+## Exportar app a BD
+python manage.py makemigrations
+python manage.py sqlmigrate ##NAME## 0001
+python manage.py migrate
