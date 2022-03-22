@@ -1,7 +1,7 @@
 # EntregaIntermediaGrupo5
 Proyecto de Agustín Ambrosi y Agustín Hinterwimmer
 
-#Explicación:
+#Explicación:\n
 La página creada es un blog sobre música de nombre "Musicy", con un apartado para cargar canciones y otro para cargar información de la banda, además del blog propiamente dicho. Actualmente se encuentra desarrollado únicamente el registro de la banda, en el cual uno puede cargar el nombre y el rol de cada miembro con texto (Pianista, Vocalista, Guitarrista, etc.) y luego también filtrar a los músicos según el rol.
 
 Para iniciar se puede ir al "landing", que sería "/musicy/home/". A pesar de no tener todavía trabajado el front end, todos los botones son navegables, aunque no existe un indicador que señale en qué página está uno, ya que todo el menú de navegación se hizo con plantillas heredadas.
