@@ -11,6 +11,6 @@ class BlogEntry(models.Model):
     titulo = models.CharField(max_length=200)
     cuerpo = models.TextField()
 
-class Musicians(models.Model):
+class Musician(models.Model):
     nombre = models.CharField(max_length=200)
     rol = models.CharField(max_length=200)
