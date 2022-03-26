@@ -2,6 +2,7 @@ from django.urls import path
 import Musicy.views as vw
 
 urlpatterns = [
+    path("",vw.home),
     path("home/",vw.home,name="home"),
     path("test/",vw.test,name="test"),
     path("blog/",vw.blog,name="blog"),

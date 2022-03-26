@@ -1,4 +1,3 @@
-import re
 from django.shortcuts import render
 from django.template import loader, context
 from django.http import HttpResponse
