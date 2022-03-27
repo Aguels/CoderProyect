@@ -2,15 +2,15 @@ from django.urls import path
 import Musicy.views as vw
 
 urlpatterns = [
-    path("",vw.home),
+    path("",vw.rehome),
     path("home/",vw.home,name="home"),
     path("test/",vw.test,name="test"),
     path("blog/",vw.blog,name="blog"),
     path("cancionero/",vw.cancionero,name="cancionero"),
-    path("registro/",vw.registro),
-    path("form/", vw.formulario,name="formulario"),
-    path("navegador/",vw.navegador,name="registro"),
-    path("loading/",vw.buscar),
-    
+    path("musicos/",vw.navegador,name="musicos"),
+    path("musicos/buscar/",vw.buscar),
+    path("musicos/cargar/", vw.formulario,name="formulario"),
+    path("musicos/listado/",vw.show),
+    path("musicos/borrar/(<int:id>)",vw.deletemus,name="delmus"),
 ]
     

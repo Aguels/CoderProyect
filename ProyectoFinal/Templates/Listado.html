@@ -12,19 +12,18 @@
         </header> 
 
         <!-- Content section-->
-        <p>Músicos con rol de {{rol}}:</p>
-
-        {% if ret %}
+        <br>
+        <p>Todos los músicos:</p>
             
-        <ul>
-        {%for Musician in ret %}
-            <li> {{Musician.nombre}}</li>
+        <ul>        
+        {%for Musician in Músicos %}
+            <li> {{Musician}}</li>
             <button><a href="{% url 'delmus' Musician.id %}">Eliminar</a></button>
         {% endfor %}
         
         </ul>
 
-        {% endif %}
+        
 
         <!-- Image element - set the background image for the header in the line below-->
         <br>

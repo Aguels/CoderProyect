@@ -3,7 +3,7 @@ from django.urls import path,include
 import Musicy.views as vw
 
 urlpatterns = [
-    path("", vw.home),    
+    path("", vw.rehome),    
     path('admin/', admin.site.urls),
     path("musicy/", include("Musicy.urls"))
 ]

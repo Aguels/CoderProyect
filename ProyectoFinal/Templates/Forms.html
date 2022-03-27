@@ -19,7 +19,7 @@
 
         {% endif %}
 
-        <form action="/musicy/form/" method="POST">{% csrf_token %}
+        <form action="/musicy/musicos/cargar/" method="POST">{% csrf_token %}
             <br>
             <table>
                 {{ Form.as_table }} 
