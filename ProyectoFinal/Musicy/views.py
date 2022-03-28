@@ -35,6 +35,14 @@ def registro(request):
     doc = plantilla.render(dict)
     return HttpResponse(doc)
 
+def navegador(request):
+
+    return render(request, "Navegador.html")
+
+def rehome(request):
+    response = redirect('/musicy/home/')
+    return response
+
 def formulario(request):
     if request.method == "POST":
         Form = f.inputmus(request.POST)
@@ -51,11 +59,7 @@ def formulario(request):
     
     return render(request, "Forms.html", {"Form":Form})
 
-def navegador(request):
-
-    return render(request, "Navegador.html")
-
-def buscar(request):
+def buscarmus(request):
     if request.GET["Rol"]:
         rol = request.GET["Rol"]
         ret = mod.Musician.objects.filter(rol__icontains=rol)
@@ -65,10 +69,6 @@ def buscar(request):
         respuesta = "No enviaste datos."
         return HttpResponse(respuesta)
 
-def rehome(request):
-    response = redirect('/musicy/home/')
-    return response
-
 def show(request):
     musicos = mod.Musician.objects.all()
     return render(request, "Listado.html", {"Músicos":musicos})
@@ -77,3 +77,12 @@ def deletemus(request, id):
     musico = mod.Musician.objects.get(id=id)
     musico.delete()
     return redirect("/musicy/musicos/listado/")
+
+def editmus(request,id):
+    musico = mod.Musician.objects.get(id=id)
+    if request.method == "POST":
+        Formed = f.inputmus(request.POST)
+        print(Formed)
+
+        if Formed.isvalid:
+            datos = Formed.cleaned_data
