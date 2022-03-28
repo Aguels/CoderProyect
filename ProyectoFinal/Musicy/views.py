@@ -45,7 +45,7 @@ def rehome(request):
 
 def formulario(request):
     if request.method == "POST":
-        Form = f.inputmus(request.POST)
+        Form = f.mus(request.POST)
         print(Form)
         if Form.is_valid:
             dato = Form.cleaned_data
@@ -55,7 +55,7 @@ def formulario(request):
             return redirect("/musicy/musicos/")
     
     else:
-        Form = f.inputmus()
+        Form = f.mus()
     
     return render(request, "Forms.html", {"Form":Form})
 
@@ -81,15 +81,15 @@ def deletemus(request, id):
 def editmus(request,id):
     musico = mod.Musician.objects.get(id=id)
     if request.method == "POST":
-        Formed = f.inputmus(request.POST)
+        Formed = f.mus(request.POST)
         print(Formed)
 
-        if Formed.isvalid:
+        if Formed.is_valid:
             datos = Formed.cleaned_data
-            musico.nombre = datos["nombre"]
-            musico.rol = datos["rol"]
+            musico.nombre = datos["Nombre"]
+            musico.rol = datos["Rol"]
             musico.save()
             return redirect("/musicy/musicos/listado/")
     else:
-        Formed = f.inputmus(initial= {"nombre" : musico.nombre, "rol" : musico.rol})
+        Formed = f.mus(initial= {"Nombre" : musico.nombre, "Rol" : musico.rol})
     return render(request, "EditarMusico.html",{"Formed":Formed,"id":id})
