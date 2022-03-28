@@ -86,3 +86,10 @@ def editmus(request,id):
 
         if Formed.isvalid:
             datos = Formed.cleaned_data
+            musico.nombre = datos["nombre"]
+            musico.rol = datos["rol"]
+            musico.save()
+            return redirect("/musicy/musicos/listado/")
+    else:
+        Formed = f.inputmus(initial= {"nombre" : musico.nombre, "rol" : musico.rol})
+    return render(request, "EditarMusico.html",{"Formed":Formed,"id":id})

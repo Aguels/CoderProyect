@@ -12,5 +12,6 @@ urlpatterns = [
     path("musicos/cargar/", vw.formulario,name="formulario"),
     path("musicos/listado/",vw.show),
     path("musicos/borrar/(<int:id>)",vw.deletemus,name="delmus"),
+    path("musicos/editar/(<int:id>)",vw.editmus,name="edmus"),
 ]
     

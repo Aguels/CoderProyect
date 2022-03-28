@@ -19,6 +19,7 @@
         {%for Musician in Músicos %}
             <li> {{Musician}}</li>
             <button><a href="{% url 'delmus' Musician.id %}">Eliminar</a></button>
+            <button><a href="{% url 'edmus' Musician.id %}">Editar</a></button>
         {% endfor %}
         
         </ul>
