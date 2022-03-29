@@ -1,7 +1,6 @@
 from asyncio.windows_events import NULL
 from django.db import models
-from django.views.generic import ListView
-from django.views.generic.detail import DetailView
+
 
 class Song(models.Model):
     nombre = models.CharField(max_length=200)
@@ -18,11 +17,3 @@ class Musician(models.Model):
     rol = models.CharField(max_length=200)
     def __str__(self):
         return f"{self.nombre}, {self.rol}"
-
-class blog(ListView):
-    model = BlogEntry
-    template_name = "Blog.html"
-
-class blogdetalle(DetailView):
-    model = BlogEntry
-    template_name = "BlogDetalle.html"

@@ -4,6 +4,9 @@ from django.http import HttpResponse
 from Musicy import forms as f
 import Musicy.models as mod
 from django.shortcuts import redirect
+import django.views.generic as dv
+
+
 
 def home(request):
     dict = {}
@@ -93,3 +96,27 @@ def editmus(request,id):
     else:
         Formed = f.mus(initial= {"Nombre" : musico.nombre, "Rol" : musico.rol})
     return render(request, "EditarMusico.html",{"Formed":Formed,"id":id})
+
+class blog(dv.ListView):
+    model = mod.BlogEntry
+    template_name = "Blog.html"
+
+class blogdetalle(dv.DetailView):
+    model = mod.BlogEntry
+    template_name = "BlogDetalle.html"
+
+class crearblog(dv.CreateView):
+    model = mod.BlogEntry
+    success_url = "musicy/blog/"
+    fields = ["titulo","cuerpo"]
+
+class editarblog(dv.UpdateView):
+    model = mod.BlogEntry
+    success_url = "musicy/blog/"
+    fields = ["titulo","cuerpo"]
+    template_name = "BlogForm.html"
+
+class eliminarblog(dv.DeleteView):
+    model = mod.BlogEntry
+    success_url = "musicy/blog/"
+    template_name = "BlogDelete.html"    
