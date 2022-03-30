@@ -6,25 +6,21 @@
         <header class="py-5 bg-image-full" style="background-image: url('https://source.unsplash.com/wfh8dDlNFOk/1600x900')">
             <div class="text-center my-5">
                 <img class="img-fluid rounded-circle mb-4" src="https://dummyimage.com/150x150/6c757d/dee2e6.jpg" alt="..." />
-                <h1 class="text-white fs-3 fw-bolder">Resultados</h1>
+                <h1 class="text-white fs-3 fw-bolder">Buscar Músico </h1>
                 <p class="text-white-50 mb-0">Landing Page Template</p>
             </div>
         </header> 
 
         <!-- Content section-->
-        <br>
-        <p>Todos los músicos:</p>
-            
-        <ul>        
-        {%for Musician in Músicos %}
-            <li> {{Musician}}</li>
-            <button><a href="{% url 'delmus' Musician.id %}">Eliminar</a></button>
-            <button><a href="{% url 'edmus' Musician.id %}">Editar</a></button>
-        {% endfor %}
-        
-        </ul>
 
-        
+        <form action="/musicy/musicos/buscar" method="GET">
+            <br>
+            <p>Ingrese el tipo de músico que está buscando:</p>
+            <input type="text" name="Rol" id="Rol">
+            <input type="submit" value="Enviar"><br>
+            <br>
+
+        </form>
 
         <!-- Image element - set the background image for the header in the line below-->
         <br>

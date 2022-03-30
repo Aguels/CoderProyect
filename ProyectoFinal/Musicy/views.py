@@ -7,24 +7,15 @@ from django.shortcuts import redirect
 import django.views.generic as dv
 
 
-
-def home(request):
+def inicio(request):
     dict = {}
-    plantilla = loader.get_template("Home.html")
+    plantilla = loader.get_template("Inicio.html")
     doc = plantilla.render(dict)
     return HttpResponse(doc)
 
-def test(request):
-    dict = {}
-    plantilla = loader.get_template("Pater.html")
-    doc = plantilla.render(dict)
-    return HttpResponse(doc)
-
-def blog(request):
-    dict = {}
-    plantilla = loader.get_template("Blog.html")
-    doc = plantilla.render(dict)
-    return HttpResponse(doc)
+def reinicio(request):
+    response = redirect('/musicy/inicio/')
+    return response
 
 def cancionero(request):
     dict = {}
@@ -32,21 +23,20 @@ def cancionero(request):
     doc = plantilla.render(dict)
     return HttpResponse(doc)
 
-def registro(request):
-    dict = {}
-    plantilla = loader.get_template("Registro.html")
-    doc = plantilla.render(dict)
-    return HttpResponse(doc)
+def musico(request):
+    musicos = mod.Musician.objects.all()
+    return render(request, "Musico.html", {"Músicos":musicos})
 
-def navegador(request):
+def buscarmusico(request):
+    if request.GET["Rol"]:
+        rol = request.GET["Rol"]
+        ret = mod.Musician.objects.filter(rol__icontains=rol)
+        return render(request, "MusicoResultado.html", {"ret":ret, "rol": rol})
+    else:
+        respuesta = "No enviaste datos."
+        return HttpResponse(respuesta)
 
-    return render(request, "Navegador.html")
-
-def rehome(request):
-    response = redirect('/musicy/home/')
-    return response
-
-def formulario(request):
+def formulariomusico(request):
     if request.method == "POST":
         Form = f.mus(request.POST)
         print(Form)
@@ -54,34 +44,20 @@ def formulario(request):
             dato = Form.cleaned_data
             Up = mod.Musician(nombre=dato["Nombre"], rol=dato["Rol"])
             Up.save()
-
             return redirect("/musicy/musicos/")
-    
     else:
         Form = f.mus()
-    
-    return render(request, "Forms.html", {"Form":Form})
+    return render(request, "MusicoFormulario.html", {"Form":Form})
 
-def buscarmus(request):
-    if request.GET["Rol"]:
-        rol = request.GET["Rol"]
-        ret = mod.Musician.objects.filter(rol__icontains=rol)
-        return render(request, "Resultado.html", {"ret":ret, "rol": rol})
+def busquedamusico(request):
+    return render(request, "MusicoBuscador.html")
 
-    else:
-        respuesta = "No enviaste datos."
-        return HttpResponse(respuesta)
-
-def show(request):
-    musicos = mod.Musician.objects.all()
-    return render(request, "Listado.html", {"Músicos":musicos})
-
-def deletemus(request, id):
+def borrarmusico(request, id):
     musico = mod.Musician.objects.get(id=id)
     musico.delete()
-    return redirect("/musicy/musicos/listado/")
+    return redirect("/musicy/musicos/")
 
-def editmus(request,id):
+def editarmusico(request,id):
     musico = mod.Musician.objects.get(id=id)
     if request.method == "POST":
         Formed = f.mus(request.POST)
@@ -92,31 +68,32 @@ def editmus(request,id):
             musico.nombre = datos["Nombre"]
             musico.rol = datos["Rol"]
             musico.save()
-            return redirect("/musicy/musicos/listado/")
+            return redirect("/musicy/musicos/")
     else:
         Formed = f.mus(initial= {"Nombre" : musico.nombre, "Rol" : musico.rol})
-    return render(request, "EditarMusico.html",{"Formed":Formed,"id":id})
+    return render(request, "MusicoEditar.html",{"Formed":Formed,"id":id})
 
 class blog(dv.ListView):
     model = mod.BlogEntry
     template_name = "Blog.html"
 
-class blogdetalle(dv.DetailView):
+class detalleblog(dv.DetailView):
     model = mod.BlogEntry
     template_name = "BlogDetalle.html"
 
 class crearblog(dv.CreateView):
     model = mod.BlogEntry
-    success_url = "musicy/blog/"
+    success_url = "/musicy/blog/"
     fields = ["titulo","cuerpo"]
+    template_name = "BlogFormulario.html"
 
 class editarblog(dv.UpdateView):
     model = mod.BlogEntry
-    success_url = "musicy/blog/"
+    success_url = "/musicy/blog/"
     fields = ["titulo","cuerpo"]
-    template_name = "BlogForm.html"
+    template_name = "BlogFormulario.html"
 
 class eliminarblog(dv.DeleteView):
     model = mod.BlogEntry
-    success_url = "musicy/blog/"
-    template_name = "BlogDelete.html"    
+    success_url = "/musicy/blog/"
+    template_name = "BlogBorrar.html"
