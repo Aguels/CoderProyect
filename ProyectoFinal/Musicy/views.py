@@ -101,13 +101,13 @@ class eliminarblog(dv.DeleteView):
     template_name = "BlogBorrar.html"
 
 def usuarios(request):
-    ingreso = djf.AuthenticationForm()
-    registro = djf.UserCreationForm()
+    ingreso = f.login()
+    registro = f.registro()
     return render(request,"Usuarios.html", {"ingreso":ingreso, "registro":registro})
 
 def loginusuarios(request):
     if request.method == "POST":
-        ingreso = djf.AuthenticationForm(request, data=request.POST)
+        ingreso = f.login(request, data=request.POST)
         if ingreso.is_valid():
             usuario = ingreso.cleaned_data.get("username")
             contraseña = ingreso.cleaned_data.get("password")
@@ -124,7 +124,7 @@ def loginusuarios(request):
 
 def registrousuarios(request):
     if request.method == "POST":
-        registro = djf.UserCreationForm(request.POST)
+        registro = f.registro(request.POST)
         if registro.is_valid():
             username = registro.cleaned_data["username"]
             registro.save()
