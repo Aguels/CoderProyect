@@ -5,6 +5,8 @@ from Musicy import forms as f
 import Musicy.models as mod
 from django.shortcuts import redirect
 import django.views.generic as dv
+import django.contrib.auth.forms as djf
+from django.contrib.auth import login, logout, authenticate
 
 
 def inicio(request):
@@ -97,3 +99,37 @@ class eliminarblog(dv.DeleteView):
     model = mod.BlogEntry
     success_url = "/musicy/blog/"
     template_name = "BlogBorrar.html"
+
+def usuarios(request):
+    ingreso = djf.AuthenticationForm()
+    registro = djf.UserCreationForm()
+    return render(request,"Usuarios.html", {"ingreso":ingreso, "registro":registro})
+
+def loginusuarios(request):
+    if request.method == "POST":
+        ingreso = djf.AuthenticationForm(request, data=request.POST)
+        if ingreso.is_valid():
+            usuario = ingreso.cleaned_data.get("username")
+            contraseña = ingreso.cleaned_data.get("password")
+            user = authenticate(username=usuario, password=contraseña)
+            if user is not None:
+                login(request, user)
+                return render(request, "Inicio.html", {"mensaje":f"Bienvenido {usuario}"})
+            else:
+                return render(request, "Inicio.html", {"mensaje":"Error: Datos incorrectos."})
+        else:
+            return render(request,"Inicio.html",{"mensaje":"Error: Datos incorrectos."})    
+    else:
+        return render(request,"Inicio.html",{"mensaje":"Error en formulario."})
+
+def registrousuarios(request):
+    if request.method == "POST":
+        registro = djf.UserCreationForm(request.POST)
+        if registro.is_valid():
+            username = registro.cleaned_data["username"]
+            registro.save()
+            return render(request,"Inicio.html",{"mensaje":"Usuario registrado correctamente."})
+        else:
+            return render(request,"Inicio.html",{"mensaje":"Error en los datos ingresados."})
+    else:
+        return render(request,"Inicio.html",{"mensaje":"Error HTML."})

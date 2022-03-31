@@ -1,3 +1,4 @@
+from unicodedata import name
 from django.urls import path
 import Musicy.views as vw
 
@@ -13,8 +14,11 @@ urlpatterns = [
     path("musicos/editar/(<int:id>)",vw.editarmusico,name="edmus"),
     path("blog/",vw.blog.as_view(),name="blog"),
     path("blog/nuevo",vw.crearblog.as_view(),name="nuevo"),
-    path(r"^blog/(?P<pk>\d+)$)",vw.detalleblog.as_view(),name="detalle"),
-    path(r"blog/(?P<pk>\d+)/editar$)",vw.editarblog.as_view(),name="editar"),
-    path(r"blog/(?P<pk>\d+)/borrar$)",vw.eliminarblog.as_view(),name="borrar"),
+    path("blog/(<pk>))",vw.detalleblog.as_view(),name="detalle"),
+    path("blog/(<pk>)/editar)",vw.editarblog.as_view(),name="editar"),
+    path("blog/(<pk>)/borrar)",vw.eliminarblog.as_view(),name="borrar"),
+    path("usuarios/", vw.usuarios,name="login"),
+    path("usuarios/ingreso/", vw.loginusuarios),
+    path("usuarios/registro/", vw.registrousuarios),
 ]
     
