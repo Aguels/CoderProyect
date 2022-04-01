@@ -1,5 +1,5 @@
-from unicodedata import name
 from django.urls import path
+from django.contrib.auth.views import LogoutView
 import Musicy.views as vw
 
 urlpatterns = [
@@ -20,5 +20,6 @@ urlpatterns = [
     path("usuarios/", vw.usuarios,name="login"),
     path("usuarios/ingreso/", vw.loginusuarios),
     path("usuarios/registro/", vw.registrousuarios),
+    path("usuarios/logout",LogoutView.as_view(template_name="Usuarios"),name="logout")
 ]
     

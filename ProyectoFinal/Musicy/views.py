@@ -10,22 +10,16 @@ from django.contrib.auth import login, logout, authenticate
 
 
 def inicio(request):
-    dict = {}
-    plantilla = loader.get_template("Inicio.html")
-    doc = plantilla.render(dict)
-    return HttpResponse(doc)
+    return render(request,"Inicio.html")
 
 def reinicio(request):
-    response = redirect('/musicy/inicio/')
-    return response
+    return redirect('/musicy/inicio/')
 
 def cancionero(request):
-    dict = {}
-    plantilla = loader.get_template("Cancionero.html")
-    doc = plantilla.render(dict)
-    return HttpResponse(doc)
+    return HttpResponse("Work in progress")
 
 def musico(request):
+
     musicos = mod.Musician.objects.all()
     return render(request, "Musico.html", {"Músicos":musicos})
 
@@ -103,7 +97,7 @@ class eliminarblog(dv.DeleteView):
 def usuarios(request):
     ingreso = f.login()
     registro = f.registro()
-    return render(request,"Usuarios.html", {"ingreso":ingreso, "registro":registro})
+    return render(request,"Usuarios.html", {"ingreso":ingreso, "registro":registro,})
 
 def loginusuarios(request):
     if request.method == "POST":
@@ -114,7 +108,7 @@ def loginusuarios(request):
             user = authenticate(username=usuario, password=contraseña)
             if user is not None:
                 login(request, user)
-                return render(request, "Inicio.html", {"mensaje":f"Bienvenido {usuario}"})
+                return render(request, "Inicio.html", {"mensaje":f"Bienvenido {user.first_name}"})
             else:
                 return render(request, "Inicio.html", {"mensaje":"Error: Datos incorrectos."})
         else:
@@ -133,3 +127,6 @@ def registrousuarios(request):
             return render(request,"Inicio.html",{"mensaje":"Error en los datos ingresados."})
     else:
         return render(request,"Inicio.html",{"mensaje":"Error HTML."})
+
+def logoutusuarios(request):
+    x = "x"
