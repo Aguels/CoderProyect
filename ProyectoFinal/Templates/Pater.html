@@ -27,7 +27,7 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'cancionero' %}">Cancionero</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'musico' %}">Músicos</a></li>
                         {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link">{{user.first_name}}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'usuario' %}">{{user.first_name}}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Salir</a></li>
                         {% else %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Ingresar</a></li>

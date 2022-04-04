@@ -1,0 +1,5 @@
+3 pruebas con la correspondiente documentación
+Crear video
+Crear About (/about)
+Vista de blogs (/pages)
+Apartado detallado (/pages/<pageid>)

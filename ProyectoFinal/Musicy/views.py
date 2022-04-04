@@ -6,7 +6,8 @@ import Musicy.models as mod
 from django.shortcuts import redirect
 import django.views.generic as dv
 import django.contrib.auth.forms as djf
-from django.contrib.auth import login, logout, authenticate
+import django.contrib.auth as ca
+from django.contrib.auth.decorators import login_required
 
 
 def inicio(request):
@@ -105,9 +106,9 @@ def loginusuarios(request):
         if ingreso.is_valid():
             usuario = ingreso.cleaned_data.get("username")
             contraseña = ingreso.cleaned_data.get("password")
-            user = authenticate(username=usuario, password=contraseña)
+            user = ca.authenticate(username=usuario, password=contraseña)
             if user is not None:
-                login(request, user)
+                ca.login(request, user)
                 return render(request, "Inicio.html", {"mensaje":f"Bienvenido {user.first_name}"})
             else:
                 return render(request, "Inicio.html", {"mensaje":"Error: Datos incorrectos."})
@@ -128,5 +129,21 @@ def registrousuarios(request):
     else:
         return render(request,"Inicio.html",{"mensaje":"Error HTML."})
 
-def logoutusuarios(request):
-    x = "x"
+@login_required
+def editarusuarios(request):
+    usuario = request.user
+    if request.method == "POST":
+        editform = f.eduser(request.POST)
+        if editform.is_valid():
+            datos = editform.cleaned_data
+            usuario.email = datos["email"]
+            usuario.password1 = datos["password1"]
+            usuario.password2 = datos["password2"]
+            usuario.first_name = datos["first_name"]
+            usuario.last_name = datos["last_name"]
+            usuario.save()
+            return render(request, "Inicio.html", {"mensaje":"Los datos se han actualizado exitosamente."})
+    else:
+        editform = f.eduser(initial={"email":usuario.email,"first_name":usuario.first_name,"last_name":usuario.last_name})
+    return render(request, "UsuariosEditar.html",{"formulario":editform,"usuario":usuario})
+

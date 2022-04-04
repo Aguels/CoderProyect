@@ -17,9 +17,11 @@ urlpatterns = [
     path("blog/(<pk>))",vw.detalleblog.as_view(),name="detalle"),
     path("blog/(<pk>)/editar)",vw.editarblog.as_view(),name="editar"),
     path("blog/(<pk>)/borrar)",vw.eliminarblog.as_view(),name="borrar"),
-    path("usuarios/", vw.usuarios,name="login"),
-    path("usuarios/ingreso/", vw.loginusuarios),
-    path("usuarios/registro/", vw.registrousuarios),
-    path("usuarios/logout",LogoutView.as_view(template_name="Usuarios"),name="logout")
+    path("usuarios/",vw.usuarios,name="login"),
+    path("usuarios/ingreso/",vw.loginusuarios),
+    path("usuarios/registro/",vw.registrousuarios),
+    path("usuarios/logout",LogoutView.as_view(template_name="Usuarios"),name="logout"),
+    path("usuarios/editar",vw.editarusuarios,name="usuario"),
+    
 ]
     

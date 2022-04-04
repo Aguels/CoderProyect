@@ -7,26 +7,17 @@
             <div class="text-center my-5">
                 <img class="img-fluid rounded-circle mb-4" src="https://dummyimage.com/150x150/6c757d/dee2e6.jpg" alt="..." />
                 <h1 class="text-white fs-3 fw-bolder">Usuario</h1>
-                <p class="text-white-50 mb-0">Portal de ingreso</p>
+                <p class="text-white-50 mb-0">Editar usuario</p>
             </div>
         </header> 
         <br>
-        <p>{{mensaje}}</p><br>
-        <form action="/musicy/usuarios/ingreso/" method="POST">
+        
+        <form action="" method="POST">
             {% csrf_token %}
             <table>
-                {{ingreso.as_table}}
+                {{formulario.as_table}}
             </table>>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-        <br>
-        <br>
-        <form action="/musicy/usuarios/registro/" method="POST">
-            {% csrf_token %}
-            <table>
-                {{registro.as_table}}
-            </table>>
-            <button type="submit">Registrarse</button>
+            <button type="submit">Guardar</button>
         </form>
         <br>
 
