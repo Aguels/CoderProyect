@@ -6,7 +6,8 @@ class Song(models.Model):
     nombre = models.CharField(max_length=200)
     letra = models.TextField()
     link = models.URLField()
-    acordes = models.TextField()
+    acordes = models.CharField(max_length=200)
+    tono = models.CharField(max_length=3)
 
 class BlogEntry(models.Model):
     titulo = models.CharField(max_length=200)

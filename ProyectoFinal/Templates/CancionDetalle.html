@@ -6,9 +6,17 @@
         <header class="py-5 bg-image-full" style="background-image: url('https://source.unsplash.com/wfh8dDlNFOk/1600x900')">
             <div class="text-center my-5">
                 <img class="img-fluid rounded-circle mb-4" src="https://dummyimage.com/150x150/6c757d/dee2e6.jpg" alt="..." />
-                <h1 class="text-white fs-3 fw-bolder">Full Width Pics</h1>
+                <h1 class="text-white fs-3 fw-bolder">Cancionero</h1>
                 <p class="text-white-50 mb-0">Landing Page Template</p>
             </div>
         </header> 
-
+        <h1>{{object.nombre}}</h1>
+        <h5>Tono: {{object.tono}} <br>
+        Acordes: {{object.acordes}}</h5>
+    
+        <p>{{object.letra}}</p>
+        <p> <a href="{% url 'editar' object.id %}">Editar</a><br>
+            <a href="{% url 'borrar' object.id %}">Borrar</a><br>
+            <a href="{{object.link}}">Link</a><br>
+            <a href="{% url 'cancion'%}">Volver</a></p>
 {% endblock %}

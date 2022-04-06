@@ -12,5 +12,7 @@
         </header> 
         <h1>{{object.titulo}}</h1>
         <p>{{object.cuerpo}}</p>
-        <p><a href="{% url 'blog'%}">Volver</a></p>
+        <p> <a href="{% url 'editarb' object.id %}">Editar</a><br>
+            <a href="{% url 'borrarb' object.id %}">Borrar</a><br>
+            <a href="{% url 'blog'%}">Volver</a></p>
 {% endblock %}

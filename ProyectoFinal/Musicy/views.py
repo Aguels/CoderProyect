@@ -70,30 +70,30 @@ def editarmusico(request,id):
         Formed = f.mus(initial= {"Nombre" : musico.nombre, "Rol" : musico.rol})
     return render(request, "MusicoEditar.html",{"Formed":Formed,"id":id})
 
-class blog(dv.ListView):
-    model = mod.BlogEntry
-    template_name = "Blog.html"
+class cancion(dv.ListView):
+    model = mod.Song
+    template_name = "Cancion.html"
 
-class detalleblog(dv.DetailView):
-    model = mod.BlogEntry
-    template_name = "BlogDetalle.html"
+class detallecancion(dv.DetailView):
+    model = mod.Song
+    template_name = "CancionDetalle.html"
 
-class crearblog(dv.CreateView):
-    model = mod.BlogEntry
-    success_url = "/musicy/blog/"
-    fields = ["titulo","cuerpo"]
-    template_name = "BlogFormulario.html"
+class crearcancion(dv.CreateView):
+    model = mod.Song
+    success_url = "/musicy/cancion/"
+    fields = ["nombre","tono","acordes","letra","link"]
+    template_name = "CancionFormulario.html"
 
-class editarblog(dv.UpdateView):
-    model = mod.BlogEntry
-    success_url = "/musicy/blog/"
-    fields = ["titulo","cuerpo"]
-    template_name = "BlogFormulario.html"
+class editarcancion(dv.UpdateView):
+    model = mod.Song
+    success_url = "/musicy/cancion/"
+    fields = ["nombre","tono","acordes","letra","link"]
+    template_name = "CancionFormulario.html"
 
-class eliminarblog(dv.DeleteView):
-    model = mod.BlogEntry
-    success_url = "/musicy/blog/"
-    template_name = "BlogBorrar.html"
+class eliminarcancion(dv.DeleteView):
+    model = mod.Song
+    success_url = "/musicy/cancion/"
+    template_name = "CancionBorrar.html"
 
 def usuarios(request):
     ingreso = f.login()
@@ -147,3 +147,30 @@ def editarusuarios(request):
         editform = f.eduser(initial={"email":usuario.email,"first_name":usuario.first_name,"last_name":usuario.last_name})
     return render(request, "UsuariosEditar.html",{"formulario":editform,"usuario":usuario})
 
+class blog(dv.ListView):
+    model = mod.BlogEntry
+    template_name = "Blog.html"
+
+class detalleblog(dv.DetailView):
+    model = mod.BlogEntry
+    template_name = "BlogDetalle.html"
+
+class crearblog(dv.CreateView):
+    model = mod.BlogEntry
+    success_url = "/musicy/pages/"
+    fields = ["titulo","cuerpo"]
+    template_name = "BlogFormulario.html"
+
+class editarblog(dv.UpdateView):
+    model = mod.BlogEntry
+    success_url = "/musicy/pages/"
+    fields = ["titulo","cuerpo"]
+    template_name = "BlogFormulario.html"
+
+class eliminarblog(dv.DeleteView):
+    model = mod.BlogEntry
+    success_url = "/musicy/pages/"
+    template_name = "BlogBorrar.html"
+
+def about(request):
+    return render(request,"About.html")
