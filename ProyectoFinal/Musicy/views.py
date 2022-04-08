@@ -16,9 +16,6 @@ def inicio(request):
 def reinicio(request):
     return redirect('/musicy/inicio/')
 
-def cancionero(request):
-    return HttpResponse("Work in progress")
-
 def musico(request):
 
     musicos = mod.Musician.objects.all()
