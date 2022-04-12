@@ -3,11 +3,10 @@
 {% block content %}
 
         <!-- Header - set the background image for the header in the line below-->
-        <header class="py-5 bg-image-full" style="background-image: url({% static 'assets/back.png' %})">
+        <header class="py-3 bg-image-full" style="background-image: url({% static 'assets/back.png' %})">
             <div class="text-center my-5">
                 <img class="img-fluid rounded-circle mb-4" src="{% static 'assets/logo.png' %}" alt="..." />
-                <h1 class="text-white fs-3 fw-bolder">Editar Músico </h1>
-                <p class="text-white-50 mb-0">Landing Page Template</p>
+                <h1 class="text-black fs-3 fw-bolder">Editar Músico </h1>
             </div>
         </header> 
 
@@ -26,17 +25,8 @@
             </table>
             <br>
         
-            <input type="submit" value="Enviar">
+            <input class="btn btn-dark" type="submit" value="Enviar">
             <br>
             
         </form>
-
-        <!-- Image element - set the background image for the header in the line below-->
-        <br>
-        <div class="py-5 bg-image-full" style="background-image: url('https://source.unsplash.com/4ulffa6qoKA/1200x800')">
-
-            <!-- Put anything you want here! The spacer below with inline CSS is just for demo purposes!-->
-            <div style="height: 20rem"></div>
-        </div>
-
 {% endblock %}

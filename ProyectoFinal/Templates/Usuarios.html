@@ -3,31 +3,32 @@
 {% block content %}
 
         <!-- Header - set the background image for the header in the line below-->
-        <header class="py-5 bg-image-full" style="background-image: url({% static 'assets/back.png' %})">
+        <header class="py-3 bg-image-full" style="background-image: url({% static 'assets/back.png' %})">
             <div class="text-center my-5">
                 <img class="img-fluid rounded-circle mb-4" src="{% static 'assets/logo.png' %}" alt="..." />
-                <h1 class="text-black fs-3 fw-bolder">Usuario</h1>
-                <p class="text-black-50 mb-0">Portal de ingreso</p>
+                <h1 class="text-black fs-3 fw-bolder">Usuarios</h1>
             </div>
-        </header> 
+        </header><br>
+        <body>
+            <div id="columna1">
+                <form action="/musicy/usuarios/ingreso/" method="POST">
+                    {% csrf_token %}
+                    <table>
+                        {{ingreso.as_table}}
+                    </table><br>
+                    <button class="btn btn-dark" type="submit">Iniciar Sesión</button>
+            </div>         
+            <div id="columna2">
+                </form>
+                <br><br>
+                <form action="/musicy/usuarios/registro/" method="POST">
+                    {% csrf_token %}
+                    <table>
+                        {{registro.as_table}}
+                    </table><br>
+                    <button class="btn btn-dark" type="submit">Registrarse</button>
+                </form>
+            </div>
+        </body>
         <br>
-        <p>{{mensaje}}</p><br>
-        <form action="/musicy/usuarios/ingreso/" method="POST">
-            {% csrf_token %}
-            <table>
-                {{ingreso.as_table}}
-            </table>>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-        <br>
-        <br>
-        <form action="/musicy/usuarios/registro/" method="POST">
-            {% csrf_token %}
-            <table>
-                {{registro.as_table}}
-            </table>>
-            <button type="submit">Registrarse</button>
-        </form>
-        <br>
-
 {% endblock %}

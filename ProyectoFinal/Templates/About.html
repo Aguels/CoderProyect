@@ -2,11 +2,10 @@
 {% load static %}
 {% block content %}
         <!-- Header - set the background image for the header in the line below-->
-        <header class="py-5 bg-image-full" style="background-image: url({% static 'assets/back.png' %})">
+        <header class="py-3 bg-image-full" style="background-image: url({% static 'assets/back.png' %})">
             <div class="text-center my-5">
                 <img class="img-fluid rounded-circle mb-4" src="{% static 'assets/logo.png' %}" alt="..." />
-                <h1 class="text-white fs-3 fw-bolder">Sobre nosotros</h1>
-                <p class="text-white-50 mb-0">Agustín Ambrosi y Agustín Hinterwimmer</p>
+                <h1 class="text-black fs-3 fw-bolder">Sobre nosotros</h1>
             </div>
         </header>   
         <!-- Content section-->
@@ -14,18 +13,14 @@
             <div class="container my-5">
                 <div class="row justify-content-center">
                     <div class="col-lg-6">
-                        <h2>Bienvenido a Musicy</h2>
-                        <p class="lead">Un proyecto de Agustín Ambrosi y Agustin Hinterwimmer.</p>
+                        <h1>Los Creadores</h1><br>
+                        <ul><h5>Agustín Ambrosi</h5></ul>
+                        <p class="lead">Estudiante de programación y data science, músico y director de un ensamble. Soporte técnico en una empresa de software.</p>
+                        <ul><h5>Agustín Hinterwimmer</h5></ul>
+                        <p class="lead">Estudiantes de CoderHouse.</p>
                         <br>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Image element - set the background image for the header in the line below-->
-        <div class="py-5 bg-image-full" style="background-image: url('https://source.unsplash.com/4ulffa6qoKA/1200x800')">
-            <!-- Put anything you want here! The spacer below with inline CSS is just for demo purposes!-->
-            <div style="height: 20rem"></div>
-        </div>
-        </section>
-
 {% endblock %}

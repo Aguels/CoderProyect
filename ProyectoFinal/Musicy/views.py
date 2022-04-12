@@ -17,7 +17,6 @@ def reinicio(request):
     return redirect('/musicy/inicio/')
 
 def musico(request):
-
     musicos = mod.Musician.objects.all()
     return render(request, "Musico.html", {"Músicos":musicos})
 
@@ -126,7 +125,6 @@ def registrousuarios(request):
     else:
         return render(request,"Inicio.html",{"mensaje":"Error HTML."})
 
-@login_required
 def editarusuarios(request):
     usuario = request.user
     if request.method == "POST":

@@ -7776,8 +7776,7 @@ textarea.form-control-lg {
 
 .text-black-50 {
   --bs-text-opacity: 1;
-  color: rgba(0, 0, 0, 1) !important;
-  font-weight: bold;
+  color: rgba(0, 0, 0, 0.5) !important;
 }
 
 .text-white-50 {
