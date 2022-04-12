@@ -8,10 +8,14 @@ class Song(models.Model):
     link = models.URLField()
     acordes = models.CharField(max_length=200)
     tono = models.CharField(max_length=3)
+    def __str__(self):
+        return f"{self.nombre}"
 
 class BlogEntry(models.Model):
     titulo = models.CharField(max_length=200)
     cuerpo = models.TextField()
+    def __str__(self):
+        return f"{self.titulo}"
 
 class Musician(models.Model):
     nombre = models.CharField(max_length=200)

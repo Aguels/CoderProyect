@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.template import loader, context
 from django.http import HttpResponse
+from django.views import View
 from Musicy import forms as f
 import Musicy.models as mod
 from django.shortcuts import redirect
@@ -8,7 +9,12 @@ import django.views.generic as dv
 import django.contrib.auth.forms as djf
 import django.contrib.auth as ca
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
+
+class MyView(LoginRequiredMixin, View):
+    login_url = '/usuarios/'
+    redirect_field_name = 'redirect_to'
 
 def inicio(request):
     return render(request,"Inicio.html")
@@ -29,6 +35,7 @@ def buscarmusico(request):
         respuesta = "No enviaste datos."
         return HttpResponse(respuesta)
 
+@login_required
 def formulariomusico(request):
     if request.method == "POST":
         Form = f.mus(request.POST)
@@ -45,11 +52,13 @@ def formulariomusico(request):
 def busquedamusico(request):
     return render(request, "MusicoBuscador.html")
 
+@login_required
 def borrarmusico(request, id):
     musico = mod.Musician.objects.get(id=id)
     musico.delete()
     return redirect("/musicy/musicos/")
 
+@login_required
 def editarmusico(request,id):
     musico = mod.Musician.objects.get(id=id)
     if request.method == "POST":
@@ -74,19 +83,19 @@ class detallecancion(dv.DetailView):
     model = mod.Song
     template_name = "CancionDetalle.html"
 
-class crearcancion(dv.CreateView):
+class crearcancion(LoginRequiredMixin,dv.CreateView):
     model = mod.Song
     success_url = "/musicy/cancion/"
     fields = ["nombre","tono","acordes","letra","link"]
     template_name = "CancionFormulario.html"
 
-class editarcancion(dv.UpdateView):
+class editarcancion(LoginRequiredMixin,dv.UpdateView):
     model = mod.Song
     success_url = "/musicy/cancion/"
     fields = ["nombre","tono","acordes","letra","link"]
     template_name = "CancionFormulario.html"
 
-class eliminarcancion(dv.DeleteView):
+class eliminarcancion(LoginRequiredMixin,dv.DeleteView):
     model = mod.Song
     success_url = "/musicy/cancion/"
     template_name = "CancionBorrar.html"
@@ -150,19 +159,19 @@ class detalleblog(dv.DetailView):
     model = mod.BlogEntry
     template_name = "BlogDetalle.html"
 
-class crearblog(dv.CreateView):
+class crearblog(LoginRequiredMixin,dv.CreateView):
     model = mod.BlogEntry
     success_url = "/musicy/pages/"
     fields = ["titulo","cuerpo"]
     template_name = "BlogFormulario.html"
 
-class editarblog(dv.UpdateView):
+class editarblog(LoginRequiredMixin,dv.UpdateView):
     model = mod.BlogEntry
     success_url = "/musicy/pages/"
     fields = ["titulo","cuerpo"]
     template_name = "BlogFormulario.html"
 
-class eliminarblog(dv.DeleteView):
+class eliminarblog(LoginRequiredMixin,dv.DeleteView):
     model = mod.BlogEntry
     success_url = "/musicy/pages/"
     template_name = "BlogBorrar.html"
