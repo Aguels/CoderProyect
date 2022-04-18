@@ -17,11 +17,11 @@
         <ul>
             {% for cancion in object_list %}
                 <li>
-                    {{cancion.nombre}}{{cancion.tono}}
+                    {{cancion.nombre}}, tono: {{cancion.tono}}
                         <a class="btn btn-dark" href="{% url 'detalle' cancion.id %}">Ver</a>
                         {% if user.is_authenticated %}
                             <a class="btn btn-dark" href="{% url 'editar' cancion.id %}">Editar</a>
-                            <a class="btn btn-dark" href="{% url 'borrar' cancion.id %}">Borrar</a>
+                            <a class="btn btn-dark" href="{% url 'borrar' cancion.id %}">Borrar</a><br><br>
                         {% else %}
                         {% endif %}
                 </li>

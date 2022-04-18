@@ -13,7 +13,7 @@
         <h5>Tono: {{object.tono}} <br>
         Acordes: {{object.acordes}}</h5>
     
-        <p>{{object.letra}}</p>
+        <p>{{object.letra | linebreaks }}</p>
         {% if user.is_authenticated %}
             <a class="btn btn-dark" href="{% url 'editar' object.id %}">Editar</a>
             <a class="btn btn-dark" href="{% url 'borrar' object.id %}">Borrar</a>

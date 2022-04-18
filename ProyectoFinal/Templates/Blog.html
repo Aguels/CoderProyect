@@ -20,7 +20,7 @@
                         <a class="btn btn-dark" href="{% url 'detalleb' entrada.id %}">Ver</a>
                         {% if user.is_authenticated %}
                             <a class="btn btn-dark" href="{% url 'editarb' entrada.id %}">Editar</a>
-                            <a class="btn btn-dark" href="{% url 'borrarb' entrada.id %}">Borrar</a>
+                            <a class="btn btn-dark" href="{% url 'borrarb' entrada.id %}">Borrar</a><br><br>
                         {% else %}
                         {% endif %}
                         
