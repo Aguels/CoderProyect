@@ -16,7 +16,9 @@
         <ul>
             {% for entrada in object_list %}
                 <li>
-                    {{entrada.titulo}}
+                    <strong>{{entrada.titulo}}</strong><br>
+                    {{entrada.subtitulo}}<br>
+                    <em>Autor: {{entrada.autor.last_name}}, {{entrada.autor.first_name}}</em><br>
                         <a class="btn btn-dark" href="{% url 'detalleb' entrada.id %}">Ver</a>
                         {% if user.is_authenticated %}
                             <a class="btn btn-dark" href="{% url 'editarb' entrada.id %}">Editar</a>

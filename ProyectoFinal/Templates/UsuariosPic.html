@@ -10,17 +10,12 @@
             </div>
         </header> 
         <br>
-        
-        <form action="" method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <table>
-                {{formulario.as_table}}
-            </table>
+                {{formularioPic.as_table}}
+            </table><br>
             <button class="btn btn-dark" type="submit">Guardar</button>
         </form>
         <br>
-
-            <a href="editarpic" class="btn btn-dark" type="submit">Editar imagen</a>
-        </form>
-        <br><br>
 {% endblock %}

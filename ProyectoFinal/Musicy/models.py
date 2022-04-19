@@ -1,6 +1,6 @@
 from asyncio.windows_events import NULL
+from django.contrib.auth.models import User
 from django.db import models
-
 
 class Song(models.Model):
     nombre = models.CharField(max_length=200)
@@ -13,7 +13,10 @@ class Song(models.Model):
 
 class BlogEntry(models.Model):
     titulo = models.CharField(max_length=200)
+    subtitulo = models.CharField(max_length=200)
+    fecha = models.DateField(auto_now_add=True, blank=True,null=True)
     cuerpo = models.TextField()
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return f"{self.titulo}"
 
@@ -22,3 +25,7 @@ class Musician(models.Model):
     rol = models.CharField(max_length=200)
     def __str__(self):
         return f"{self.nombre}, {self.rol}"
+
+class Pic(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to="images",null=True,blank=True)

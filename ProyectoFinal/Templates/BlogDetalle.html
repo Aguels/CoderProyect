@@ -10,7 +10,9 @@
             </div>
         </header> 
         <h1>{{object.titulo}}</h1>
+        <h3>{{object.subtitulo}}</h3><br>
         <p>{{object.cuerpo | linebreaks }}</p>
+        Autor: <em>{{object.autor.last_name}}, {{object.autor.first_name}}</em><br><br>
         {% if user.is_authenticated %}
             <a class="btn btn-dark" href="{% url 'editarb' object.id %}">Editar</a>
             <a class="btn btn-dark" href="{% url 'borrarb' object.id %}">Borrar</a>

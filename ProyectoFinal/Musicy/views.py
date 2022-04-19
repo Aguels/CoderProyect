@@ -10,6 +10,7 @@ import django.contrib.auth.forms as djf
 import django.contrib.auth as ca
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 
 
 class MyView(LoginRequiredMixin, View):
@@ -134,6 +135,7 @@ def registrousuarios(request):
     else:
         return render(request,"Inicio.html",{"mensaje":"Error HTML."})
 
+@login_required
 def editarusuarios(request):
     usuario = request.user
     if request.method == "POST":
@@ -162,13 +164,16 @@ class detalleblog(dv.DetailView):
 class crearblog(LoginRequiredMixin,dv.CreateView):
     model = mod.BlogEntry
     success_url = "/musicy/pages/"
-    fields = ["titulo","cuerpo"]
+    fields = ["titulo","subtitulo","cuerpo"]
     template_name = "BlogFormulario.html"
+    def form_valid(self,form):
+        form.instance.autor = self.request.user
+        return super().form_valid(form)
 
 class editarblog(LoginRequiredMixin,dv.UpdateView):
     model = mod.BlogEntry
     success_url = "/musicy/pages/"
-    fields = ["titulo","cuerpo"]
+    fields = ["titulo","subtitulo","cuerpo"]
     template_name = "BlogFormulario.html"
 
 class eliminarblog(LoginRequiredMixin,dv.DeleteView):
@@ -178,3 +183,21 @@ class eliminarblog(LoginRequiredMixin,dv.DeleteView):
 
 def about(request):
     return render(request,"About.html")
+
+#def buscarPic(user):
+#    return mod.Pic.objects.filter(user=user)[0].imagen.url
+#{"Pic":buscarPic(request.user)}
+
+@login_required
+def agregarPic(request):
+    usuario = request.user
+    if request.method == "POST":
+        formularioPic = f.cargarPic(request.POST,request.FILES)
+        if formularioPic.is_valid():
+            usuariox = User.objects.get(username=usuario)
+            Pic = mod.Pic(user=usuariox, imagen=formularioPic.cleaned_data["imagen"])
+            Pic.save()
+            return render(request, "Inicio.html", {"mensaje":"La imagen se ha actualizado exitosamente."})
+    else:
+        formularioPic = f.cargarPic()
+    return render(request, "UsuariosPic.html",{"formularioPic":formularioPic,"usuario":usuario})

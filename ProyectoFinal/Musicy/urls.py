@@ -27,6 +27,7 @@ urlpatterns = [
     path("pages/(<pk>)/editar",vw.editarblog.as_view(),name="editarb"),
     path("pages/(<pk>)/borrar",vw.eliminarblog.as_view(),name="borrarb"),
     path("about/",vw.about,name="about"),
+    path("usuarios/editarpic/",vw.agregarPic)
     
 ]
     

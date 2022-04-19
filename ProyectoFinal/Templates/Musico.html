@@ -18,8 +18,8 @@
         {%for Musician in Músicos %}
             <li>{{Musician}}</li>
             {% if user.is_authenticated %}
-                <button class="btn btn-dark" href="{% url 'delmus' Musician.id %}">Eliminar</button>
-                <button class="btn btn-dark" href="{% url 'edmus' Musician.id %}">Editar</button>
+                <a class="btn btn-dark" href="{% url 'delmus' Musician.id %}">Eliminar</a>
+                <a class="btn btn-dark" href="{% url 'edmus' Musician.id %}">Editar</a>
             {% else %}
             {% endif %}
         {% endfor %}

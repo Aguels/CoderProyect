@@ -30,3 +30,6 @@ class eduser(djf.UserCreationForm):
     class Meta:
         model = djf.User
         fields = ["email","password1","password2","first_name","last_name"]
+
+class cargarPic(forms.Form):
+    imagen = forms.ImageField()
