@@ -2,6 +2,7 @@ from asyncio.windows_events import NULL
 from django.contrib.auth.models import User
 from django.db import models
 from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 class Song(models.Model):
     nombre = models.CharField(max_length=200)
