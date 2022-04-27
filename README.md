@@ -11,7 +11,6 @@ Las funcionalidades de abm se encuentran disponibles para todos los models (mús
 Se ha creado un login en una única página donde conviven el formulario de ingreso y registro, y se ha limitado el abm a todo usuario registrado (un usuario Unknown tiene bloqueado el acceso, pero no es necesario tener derechos especiales para realizar altas, bajas o modificaciones, únicamente estar logeado).
 
 Restan los siguientes puntos:
--Video explicativo
 -App de mensajería
--Editor avanzado de texto
+-Editor avanzado de texto (RESUELTO, añadido en Blog)
 -Carga de imágenes a blog

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "Musicy",
+    "ckeditor",
 ]
 
 MIDDLEWARE = [
@@ -127,5 +128,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = "/musicy/usuarios/"
 LOGOUT_REDIRECT_URL = "/musicy/usuarios/"
 
-MEDIA_URL = "/media/"
+MEDIA_URL = "media/"
 MEDIA_ROOT = os.path.join(BASE_DIR,"media")
