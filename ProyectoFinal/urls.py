@@ -7,5 +7,6 @@ urlpatterns = [
     path("", vw.reinicio),    
     path('admin/', admin.site.urls),
     path("musicy/", include("Musicy.urls")),
+    path("users/", include("Users.urls")),
     path(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
