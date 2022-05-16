@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     "Musicy",
     "ckeditor",
     "Users",
+    "Blog",
+    "Musicos",
+    "Cancion",
 ]
 
 MIDDLEWARE = [

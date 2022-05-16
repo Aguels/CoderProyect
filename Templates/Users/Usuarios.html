@@ -11,7 +11,7 @@
         </header><br>
         <body>
             <div id="columna1">
-                <form action="/musicy/usuarios/ingreso/" method="POST">
+                <form action="/usuarios/ingreso/" method="POST">
                     {% csrf_token %}
                     <table>
                         {{ingreso.as_table}}
@@ -21,7 +21,7 @@
             <div id="columna2">
                 </form>
                 <br><br>
-                <form action="/musicy/usuarios/registro/" method="POST">
+                <form action="/usuarios/registro/" method="POST">
                     {% csrf_token %}
                     <table>
                         {{registro.as_table}}

@@ -19,13 +19,13 @@ def login_usuarios(request):
             user = ca.authenticate(username=usuario, password=contraseña)
             if user is not None:
                 ca.login(request, user)
-                return render(request, "Inicio.html", {"mensaje":f"Bienvenido {user.first_name}"})
+                return render(request, "Musicy/Inicio.html", {"mensaje":f"Bienvenido {user.first_name}"})
             else:
-                return render(request, "Inicio.html", {"mensaje":"Error: Datos incorrectos."})
+                return render(request, "Musicy/Inicio.html", {"mensaje":"Error: Datos incorrectos."})
         else:
-            return render(request,"Inicio.html",{"mensaje":"Error: Datos incorrectos."})    
+            return render(request,"Musicy/Inicio.html",{"mensaje":"Error: Datos incorrectos."})    
     else:
-        return render(request,"Inicio.html",{"mensaje":"Error en formulario."})
+        return render(request,"Musicy/Inicio.html",{"mensaje":"Error en formulario."})
 
 def registro_usuarios(request):
     if request.method == "POST":
@@ -33,11 +33,11 @@ def registro_usuarios(request):
         if registro.is_valid():
             username = registro.cleaned_data["username"]
             registro.save()
-            return render(request,"Inicio.html",{"mensaje":"Usuario registrado correctamente."})
+            return render(request,"Musicy/Inicio.html",{"mensaje":"Usuario registrado correctamente."})
         else:
-            return render(request,"Inicio.html",{"mensaje":"Error en los datos ingresados."})
+            return render(request,"Musicy/Inicio.html",{"mensaje":"Error en los datos ingresados."})
     else:
-        return render(request,"Inicio.html",{"mensaje":"Error HTML."})
+        return render(request,"Musicy/Inicio.html",{"mensaje":"Error HTML."})
 
 @login_required
 def editar_usuarios(request):
