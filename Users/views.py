@@ -8,7 +8,7 @@ import Users.models as mod
 def usuarios(request):
     ingreso = f.login()
     registro = f.registro()
-    return render(request,"Usuarios.html", {"ingreso":ingreso, "registro":registro,})
+    return render(request,"Users/Usuarios.html", {"ingreso":ingreso, "registro":registro,})
 
 def login_usuarios(request):
     if request.method == "POST":
@@ -55,7 +55,7 @@ def editar_usuarios(request):
             return render(request, "Inicio.html", {"mensaje":"Los datos se han actualizado exitosamente."})
     else:
         editform = f.eduser(initial={"email":usuario.email,"first_name":usuario.first_name,"last_name":usuario.last_name})
-    return render(request, "UsuariosEditar.html",{"formulario":editform,"usuario":usuario})
+    return render(request, "Users/UsuariosEditar.html",{"formulario":editform,"usuario":usuario})
 
 @login_required
 def agregar_pic(request):
@@ -69,5 +69,5 @@ def agregar_pic(request):
             return render(request, "Inicio.html", {"mensaje":"La imagen se ha actualizado exitosamente."})
     else:
         formularioPic = f.cargarPic()
-    return render(request, "UsuariosPic.html",{"formularioPic":formularioPic,"usuario":usuario})
+    return render(request, "Users/UsuariosPic.html",{"formularioPic":formularioPic,"usuario":usuario})
 

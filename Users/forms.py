@@ -1,10 +1,5 @@
-from cProfile import label
 from django import forms
 import django.contrib.auth.forms as djf
-
-class mus(forms.Form):
-    Nombre = forms.CharField(max_length=200)
-    Rol = forms.CharField(max_length=200)
 
 class registro(djf.UserCreationForm):
     username = forms.CharField(label="Usuario")

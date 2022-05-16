@@ -7,7 +7,6 @@ from django.shortcuts import redirect
 import django.views.generic as dv
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
 
 
 class MyView(LoginRequiredMixin, View):
@@ -22,13 +21,13 @@ def reinicio(request):
 
 def musico(request):
     musicos = mod.Musician.objects.all()
-    return render(request, "Musico.html", {"Músicos":musicos})
+    return render(request, "Musico/Musico.html", {"Músicos":musicos})
 
 def buscar_musico(request):
     if request.GET["Rol"]:
         rol = request.GET["Rol"]
         ret = mod.Musician.objects.filter(rol__icontains=rol)
-        return render(request, "MusicoResultado.html", {"ret":ret, "rol": rol})
+        return render(request, "Musico/MusicoResultado.html", {"ret":ret, "rol": rol})
     else:
         respuesta = "No enviaste datos."
         return HttpResponse(respuesta)
@@ -45,10 +44,10 @@ def formulario_musico(request):
             return redirect("/musicy/musicos/")
     else:
         Form = f.mus()
-    return render(request, "MusicoFormulario.html", {"Form":Form})
+    return render(request, "Musico/MusicoFormulario.html", {"Form":Form})
 
 def busqueda_musico(request):
-    return render(request, "MusicoBuscador.html")
+    return render(request, "Musico/MusicoBuscador.html")
 
 @login_required
 def borrar_musico(request, id):
@@ -71,46 +70,46 @@ def editar_musico(request,id):
             return redirect("/musicy/musicos/")
     else:
         Formed = f.mus(initial= {"Nombre" : musico.nombre, "Rol" : musico.rol})
-    return render(request, "MusicoEditar.html",{"Formed":Formed,"id":id})
+    return render(request, "Musico/MusicoEditar.html",{"Formed":Formed,"id":id})
 
 class Cancion(dv.ListView):
     model = mod.Song
-    template_name = "Cancion.html"
+    template_name = "Cancion/Cancion.html"
 
 class DetalleCancion(dv.DetailView):
     model = mod.Song
-    template_name = "CancionDetalle.html"
+    template_name = "Cancion/CancionDetalle.html"
 
 class CrearCancion(LoginRequiredMixin,dv.CreateView):
     model = mod.Song
     success_url = "/musicy/cancion/"
     fields = ["nombre","tono","acordes","letra","link"]
-    template_name = "CancionFormulario.html"
+    template_name = "Cancion/CancionFormulario.html"
 
 class EditarCancion(LoginRequiredMixin,dv.UpdateView):
     model = mod.Song
     success_url = "/musicy/cancion/"
     fields = ["nombre","tono","acordes","letra","link"]
-    template_name = "CancionFormulario.html"
+    template_name = "Cancion/CancionFormulario.html"
 
 class EliminarCancion(LoginRequiredMixin,dv.DeleteView):
     model = mod.Song
     success_url = "/musicy/cancion/"
-    template_name = "CancionBorrar.html"
+    template_name = "Cancion/CancionBorrar.html"
 
 class Blog(dv.ListView):
     model = mod.BlogEntry
-    template_name = "Blog.html"
+    template_name = "Blog/Blog.html"
 
 class DetalleBlog(dv.DetailView):
     model = mod.BlogEntry
-    template_name = "BlogDetalle.html"
+    template_name = "Blog/BlogDetalle.html"
 
 class CrearBlog(LoginRequiredMixin,dv.CreateView):
     model = mod.BlogEntry
     success_url = "/musicy/pages/"
     fields = ["titulo","subtitulo","cuerpo"]
-    template_name = "BlogFormulario.html"
+    template_name = "Blog/BlogFormulario.html"
     def form_valid(self,form):
         form.instance.autor = self.request.user
         return super().form_valid(form)
@@ -119,12 +118,12 @@ class EditarBlog(LoginRequiredMixin,dv.UpdateView):
     model = mod.BlogEntry
     success_url = "/musicy/pages/"
     fields = ["titulo","subtitulo","cuerpo"]
-    template_name = "BlogFormulario.html"
+    template_name = "Blog/BlogFormulario.html"
 
 class EliminarBlog(LoginRequiredMixin,dv.DeleteView):
     model = mod.BlogEntry
     success_url = "/musicy/pages/"
-    template_name = "BlogBorrar.html"
+    template_name = "Blog/BlogBorrar.html"
 
 def about(request):
     return render(request,"About.html")
