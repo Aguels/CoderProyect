@@ -27,7 +27,7 @@ def musico(request):
     musicos = mod.Musician.objects.all()
     return render(request, "Musico.html", {"Músicos":musicos})
 
-def buscarmusico(request):
+def buscar_musico(request):
     if request.GET["Rol"]:
         rol = request.GET["Rol"]
         ret = mod.Musician.objects.filter(rol__icontains=rol)
@@ -37,7 +37,7 @@ def buscarmusico(request):
         return HttpResponse(respuesta)
 
 @login_required
-def formulariomusico(request):
+def formulario_musico(request):
     if request.method == "POST":
         Form = f.mus(request.POST)
         print(Form)
@@ -50,17 +50,17 @@ def formulariomusico(request):
         Form = f.mus()
     return render(request, "MusicoFormulario.html", {"Form":Form})
 
-def busquedamusico(request):
+def busqueda_musico(request):
     return render(request, "MusicoBuscador.html")
 
 @login_required
-def borrarmusico(request, id):
+def borrar_musico(request, id):
     musico = mod.Musician.objects.get(id=id)
     musico.delete()
     return redirect("/musicy/musicos/")
 
 @login_required
-def editarmusico(request,id):
+def editar_musico(request,id):
     musico = mod.Musician.objects.get(id=id)
     if request.method == "POST":
         Formed = f.mus(request.POST)
@@ -76,27 +76,27 @@ def editarmusico(request,id):
         Formed = f.mus(initial= {"Nombre" : musico.nombre, "Rol" : musico.rol})
     return render(request, "MusicoEditar.html",{"Formed":Formed,"id":id})
 
-class cancion(dv.ListView):
+class Cancion(dv.ListView):
     model = mod.Song
     template_name = "Cancion.html"
 
-class detallecancion(dv.DetailView):
+class DetalleCancion(dv.DetailView):
     model = mod.Song
     template_name = "CancionDetalle.html"
 
-class crearcancion(LoginRequiredMixin,dv.CreateView):
+class CrearCancion(LoginRequiredMixin,dv.CreateView):
     model = mod.Song
     success_url = "/musicy/cancion/"
     fields = ["nombre","tono","acordes","letra","link"]
     template_name = "CancionFormulario.html"
 
-class editarcancion(LoginRequiredMixin,dv.UpdateView):
+class EditarCancion(LoginRequiredMixin,dv.UpdateView):
     model = mod.Song
     success_url = "/musicy/cancion/"
     fields = ["nombre","tono","acordes","letra","link"]
     template_name = "CancionFormulario.html"
 
-class eliminarcancion(LoginRequiredMixin,dv.DeleteView):
+class EliminarCancion(LoginRequiredMixin,dv.DeleteView):
     model = mod.Song
     success_url = "/musicy/cancion/"
     template_name = "CancionBorrar.html"
@@ -106,7 +106,7 @@ def usuarios(request):
     registro = f.registro()
     return render(request,"Usuarios.html", {"ingreso":ingreso, "registro":registro,})
 
-def loginusuarios(request):
+def login_usuarios(request):
     if request.method == "POST":
         ingreso = f.login(request, data=request.POST)
         if ingreso.is_valid():
@@ -123,7 +123,7 @@ def loginusuarios(request):
     else:
         return render(request,"Inicio.html",{"mensaje":"Error en formulario."})
 
-def registrousuarios(request):
+def registro_usuarios(request):
     if request.method == "POST":
         registro = f.registro(request.POST)
         if registro.is_valid():
@@ -136,7 +136,7 @@ def registrousuarios(request):
         return render(request,"Inicio.html",{"mensaje":"Error HTML."})
 
 @login_required
-def editarusuarios(request):
+def editar_usuarios(request):
     usuario = request.user
     if request.method == "POST":
         editform = f.eduser(request.POST)
@@ -153,15 +153,15 @@ def editarusuarios(request):
         editform = f.eduser(initial={"email":usuario.email,"first_name":usuario.first_name,"last_name":usuario.last_name})
     return render(request, "UsuariosEditar.html",{"formulario":editform,"usuario":usuario})
 
-class blog(dv.ListView):
+class Blog(dv.ListView):
     model = mod.BlogEntry
     template_name = "Blog.html"
 
-class detalleblog(dv.DetailView):
+class DetalleBlog(dv.DetailView):
     model = mod.BlogEntry
     template_name = "BlogDetalle.html"
 
-class crearblog(LoginRequiredMixin,dv.CreateView):
+class CrearBlog(LoginRequiredMixin,dv.CreateView):
     model = mod.BlogEntry
     success_url = "/musicy/pages/"
     fields = ["titulo","subtitulo","cuerpo"]
@@ -170,13 +170,13 @@ class crearblog(LoginRequiredMixin,dv.CreateView):
         form.instance.autor = self.request.user
         return super().form_valid(form)
 
-class editarblog(LoginRequiredMixin,dv.UpdateView):
+class EditarBlog(LoginRequiredMixin,dv.UpdateView):
     model = mod.BlogEntry
     success_url = "/musicy/pages/"
     fields = ["titulo","subtitulo","cuerpo"]
     template_name = "BlogFormulario.html"
 
-class eliminarblog(LoginRequiredMixin,dv.DeleteView):
+class EliminarBlog(LoginRequiredMixin,dv.DeleteView):
     model = mod.BlogEntry
     success_url = "/musicy/pages/"
     template_name = "BlogBorrar.html"
@@ -189,7 +189,7 @@ def about(request):
 #{"Pic":buscarPic(request.user)}
 
 @login_required
-def agregarPic(request):
+def agregar_pic(request):
     usuario = request.user
     if request.method == "POST":
         formularioPic = f.cargarPic(request.POST,request.FILES)
