@@ -1,0 +1,26 @@
+{% extends "Pater.html" %}
+{% load static %}
+{% block content %}
+
+        <!-- Header - set the background image for the header in the line below-->
+        <header class="py-3 bg-image-full" style="background-image: url({% static 'assets/back.png' %})">
+            <div class="text-center my-5">
+                <img class="img-fluid rounded-circle mb-4" src="{% static 'assets/logo.png' %}" alt="..." />
+                <h1 class="text-black fs-3 fw-bolder">Registrarse</h1>
+            </div>
+        </header><br>
+        <body>         
+            <div id="columna2">
+                </form>
+                <br><br>
+                <form action="/usuarios/registro/" method="POST">
+                    {% csrf_token %}
+                    <table>
+                        {{registro.as_table}}
+                    </table><br>
+                    <button class="btn btn-dark" type="submit">Registrarse</button>
+                </form>
+            </div>
+        </body>
+        <br><br>
+{% endblock %}

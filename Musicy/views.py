@@ -8,4 +8,4 @@ def reinicio(request):
     return redirect('/musicy/')
 
 def about(request):
-    return render(request,"About.html")
+    return render(request,"Musicy/About.html")

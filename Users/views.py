@@ -6,9 +6,7 @@ from django.contrib.auth.models import User
 import Users.models as mod
 
 def usuarios(request):
-    ingreso = f.login()
-    registro = f.registro()
-    return render(request,"Users/Usuarios.html", {"ingreso":ingreso, "registro":registro,})
+    return render(request,"Users/Usuarios.html")
 
 def login_usuarios(request):
     if request.method == "POST":
@@ -25,7 +23,8 @@ def login_usuarios(request):
         else:
             return render(request,"Musicy/Inicio.html",{"mensaje":"Error: Datos incorrectos."})    
     else:
-        return render(request,"Musicy/Inicio.html",{"mensaje":"Error en formulario."})
+        ingreso = f.login()
+        return render(request,"Users/UsuariosIngreso.html",{"ingreso":ingreso})
 
 def registro_usuarios(request):
     if request.method == "POST":
@@ -37,7 +36,8 @@ def registro_usuarios(request):
         else:
             return render(request,"Musicy/Inicio.html",{"mensaje":"Error en los datos ingresados."})
     else:
-        return render(request,"Musicy/Inicio.html",{"mensaje":"Error HTML."})
+        registro = f.registro()
+        return render(request,"Users/UsuariosRegistro.html",{"registro":registro})
 
 @login_required
 def editar_usuarios(request):

@@ -6,11 +6,16 @@
         <header class="py-3 bg-image-full" style="background-image: url({% static 'assets/back.png' %})">
             <div class="text-center my-5">
                 <img class="img-fluid rounded-circle mb-4" src="{% static 'assets/logo.png' %}" alt="..." />
-                <h1 class="text-black fs-3 fw-bolder">Usuarios</h1>
+                <h1 class="text-black fs-3 fw-bolder">Iniciar Sesión</h1>
             </div>
         </header><br>
         <body>
-        <a class="btn btn-dark" href="{% url 'login' %}">Iniciar Sesión</a>
-        <a class="btn btn-dark" href="{% url 'registro' %}">Registrarse</a>
-        <br><br>
+            <div id="columna1">
+                <form action="/usuarios/ingreso/" method="POST">
+                    {% csrf_token %}
+                    <table>
+                        {{ingreso.as_table}}
+                    </table><br>
+                    <button class="btn btn-dark" type="submit">Iniciar Sesión</button>
+<br><br>
 {% endblock %}
