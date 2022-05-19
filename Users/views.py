@@ -64,10 +64,10 @@ def agregar_pic(request):
         formularioPic = f.cargarPic(request.POST,request.FILES)
         if formularioPic.is_valid():
             usuariox = User.objects.get(username=usuario)
-            Pic = mod.Pic(user=usuariox, imagen=formularioPic.cleaned_data["imagen"])
+            Pic = mod.Avatar(user=usuariox, imagen=formularioPic.cleaned_data["imagen"])
             Pic.save()
-            return render(request, "Inicio.html", {"mensaje":"La imagen se ha actualizado exitosamente."})
+            return render(request, "Users/UsuariosPic.html", {"mensaje":"La imagen se ha actualizado exitosamente."})
     else:
         formularioPic = f.cargarPic()
-    return render(request, "Users/UsuariosPic.html",{"formularioPic":formularioPic,"usuario":usuario})
+        return render(request, "Users/UsuariosPic.html",{"formularioPic":formularioPic,"usuario":usuario})
 
