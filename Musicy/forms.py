@@ -1,4 +1,4 @@
 from django import forms
 
-class cargarPic(forms.Form):
+class CargarPic(forms.Form):
     imagen = forms.ImageField()

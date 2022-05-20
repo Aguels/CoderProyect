@@ -21,7 +21,7 @@ def buscar_musico(request):
 @login_required
 def formulario_musico(request):
     if request.method == "POST":
-        Form = f.mus(request.POST)
+        Form = f.FormularioMusico(request.POST)
         print(Form)
         if Form.is_valid:
             dato = Form.cleaned_data
@@ -29,7 +29,7 @@ def formulario_musico(request):
             Up.save()
             return redirect("/musicy/musicos/")
     else:
-        Form = f.mus()
+        Form = f.FormularioMusico()
     return render(request, "Musico/MusicoFormulario.html", {"Form":Form})
 
 def busqueda_musico(request):
@@ -45,7 +45,7 @@ def borrar_musico(request, id):
 def editar_musico(request,id):
     musico = mod.Musician.objects.get(id=id)
     if request.method == "POST":
-        Formed = f.mus(request.POST)
+        Formed = f.FormularioMusico(request.POST)
         print(Formed)
 
         if Formed.is_valid:
@@ -55,5 +55,5 @@ def editar_musico(request,id):
             musico.save()
             return redirect("/musicy/musicos/")
     else:
-        Formed = f.mus(initial= {"Nombre" : musico.nombre, "Rol" : musico.rol})
+        Formed = f.FormularioMusico(initial= {"Nombre" : musico.nombre, "Rol" : musico.rol})
     return render(request, "Musico/MusicoEditar.html",{"Formed":Formed,"id":id})

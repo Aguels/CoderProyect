@@ -10,7 +10,7 @@ def usuarios(request):
 
 def login_usuarios(request):
     if request.method == "POST":
-        ingreso = f.login(request, data=request.POST)
+        ingreso = f.Login(request, data=request.POST)
         if ingreso.is_valid():
             usuario = ingreso.cleaned_data.get("username")
             contraseña = ingreso.cleaned_data.get("password")
@@ -23,12 +23,12 @@ def login_usuarios(request):
         else:
             return render(request,"Musicy/Inicio.html",{"mensaje":"Error: Datos incorrectos."})    
     else:
-        ingreso = f.login()
-        return render(request,"Users/UsuariosIngreso.html",{"ingreso":ingreso})
+        ingreso = f.Login()
+    return render(request,"Users/UsuariosIngreso.html",{"ingreso":ingreso})
 
 def registro_usuarios(request):
     if request.method == "POST":
-        registro = f.registro(request.POST)
+        registro = f.Registro(request.POST)
         if registro.is_valid():
             username = registro.cleaned_data["username"]
             registro.save()
@@ -36,38 +36,54 @@ def registro_usuarios(request):
         else:
             return render(request,"Musicy/Inicio.html",{"mensaje":"Error en los datos ingresados."})
     else:
-        registro = f.registro()
-        return render(request,"Users/UsuariosRegistro.html",{"registro":registro})
+        registro = f.Registro()
+    return render(request,"Users/UsuariosRegistro.html",{"registro":registro})
 
 @login_required
 def editar_usuarios(request):
     usuario = request.user
     if request.method == "POST":
-        editform = f.eduser(request.POST)
+        editform = f.EditUser(request.POST)
         if editform.is_valid():
             datos = editform.cleaned_data
             usuario.email = datos["email"]
-            usuario.password1 = datos["password1"]
-            usuario.password2 = datos["password2"]
             usuario.first_name = datos["first_name"]
             usuario.last_name = datos["last_name"]
             usuario.save()
-            return render(request, "Inicio.html", {"mensaje":"Los datos se han actualizado exitosamente."})
+            return render(request, "Musicy/Inicio.html", {"mensaje":"Los datos se han actualizado exitosamente."})
     else:
-        editform = f.eduser(initial={"email":usuario.email,"first_name":usuario.first_name,"last_name":usuario.last_name})
+        editform = f.EditUser(initial={"email":usuario.email,"first_name":usuario.first_name,"last_name":usuario.last_name})
     return render(request, "Users/UsuariosEditar.html",{"formulario":editform,"usuario":usuario})
+
+@login_required
+def editar_pass(request):
+    usuario = request.user
+    if request.method == "POST":
+        editform = f.EditPass(usuario,request.POST)
+        if editform.is_valid():
+            datos = editform.cleaned_data
+            usuario.password1 = datos["new_password1"]
+            usuario.password2 = datos["new_password2"]
+            editform.save()
+            return render(request, "Musicy/Inicio.html", {"mensaje":"La contraseña se ha actualizado exitosamente."})
+        else:
+            return render(request, "Musicy/Inicio.html", {"mensaje":"Error interno."})
+    else:
+        editform = f.EditPass(usuario,request.POST)
+    return render(request, "Users/UsuariosPass.html",{"formulario":editform,"usuario":usuario})
+
 
 @login_required
 def agregar_pic(request):
     usuario = request.user
     if request.method == "POST":
-        formularioPic = f.cargarPic(request.POST,request.FILES)
+        formularioPic = f.CargarPic(request.POST,request.FILES)
         if formularioPic.is_valid():
             usuariox = User.objects.get(username=usuario)
             Pic = mod.Avatar(user=usuariox, imagen=formularioPic.cleaned_data["imagen"])
             Pic.save()
             return render(request, "Users/UsuariosPic.html", {"mensaje":"La imagen se ha actualizado exitosamente."})
     else:
-        formularioPic = f.cargarPic()
-        return render(request, "Users/UsuariosPic.html",{"formularioPic":formularioPic,"usuario":usuario})
+        formularioPic = f.CargarPic()
+    return render(request, "Users/UsuariosPic.html",{"formularioPic":formularioPic,"usuario":usuario})
 
