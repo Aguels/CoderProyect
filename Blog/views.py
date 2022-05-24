@@ -17,8 +17,8 @@ class DetalleBlog(dv.DetailView):
 
 class CrearBlog(LoginRequiredMixin,dv.CreateView):
     model = mod.BlogEntry
-    success_url = "/musicy/pages/"
-    fields = ["titulo","subtitulo","cuerpo"]
+    success_url = "/pages/"
+    fields = ["titulo","subtitulo","cuerpo", "imagen"]
     template_name = "Blog/BlogFormulario.html"
     def form_valid(self,form):
         form.instance.autor = self.request.user
@@ -26,11 +26,11 @@ class CrearBlog(LoginRequiredMixin,dv.CreateView):
 
 class EditarBlog(LoginRequiredMixin,dv.UpdateView):
     model = mod.BlogEntry
-    success_url = "/musicy/pages/"
-    fields = ["titulo","subtitulo","cuerpo"]
+    success_url = "/pages/"
+    fields = ["titulo","subtitulo","cuerpo", "imagen"]
     template_name = "Blog/BlogFormulario.html"
 
 class EliminarBlog(LoginRequiredMixin,dv.DeleteView):
     model = mod.BlogEntry
-    success_url = "/musicy/pages/"
+    success_url = "/pages/"
     template_name = "Blog/BlogBorrar.html"
