@@ -79,6 +79,7 @@ def agregar_pic(request):
     if request.method == "POST":
         formularioPic = f.CargarPic(request.POST,request.FILES)
         if formularioPic.is_valid():
+            mod.Avatar.objects.filter(user=usuario).delete()
             usuariox = User.objects.get(username=usuario)
             Pic = mod.Avatar(user=usuariox, imagen=formularioPic.cleaned_data["imagen"])
             Pic.save()

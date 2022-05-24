@@ -9,7 +9,7 @@ class BlogEntry(models.Model):
     fecha = models.DateField(auto_now_add=True, blank=True,null=True)
     cuerpo = RichTextField()
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
-    imagen = models.ImageField(upload_to="",null=True,blank=True)
+    imagen = models.ImageField(upload_to="blog",null=True,blank=True)
 
     def __str__(self):
         return f"{self.titulo}"
