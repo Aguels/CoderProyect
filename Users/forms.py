@@ -1,5 +1,6 @@
 from django import forms
 import django.contrib.auth.forms as djf
+from django.core.exceptions import ValidationError
 
 class Registro(djf.UserCreationForm):
     username = forms.CharField(label="Usuario")

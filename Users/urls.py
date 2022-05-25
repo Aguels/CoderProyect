@@ -9,6 +9,6 @@ urlpatterns = [
     path("logout/",LogoutView.as_view(template_name="Users/UsuariosIngreso"),name="logout"),
     path("editar/",vw.editar_usuarios,name="usuario"),
     path("password/",vw.editar_pass),
-    path("editarpic/",vw.agregar_pic),
+    path("editarpic/",vw.agregar_avatar),
 ]
     

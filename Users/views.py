@@ -53,7 +53,7 @@ def editar_usuarios(request):
             return render(request, "Musicy/Inicio.html", {"mensaje":"Los datos se han actualizado exitosamente."})
     else:
         editform = f.EditUser(initial={"email":usuario.email,"first_name":usuario.first_name,"last_name":usuario.last_name})
-    return render(request, "Users/UsuariosEditar.html",{"formulario":editform,"usuario":usuario})
+    return render(request, "Users/UsuariosEditar.html",{"formulario":editform,"usuario":usuario,"avatar":buscar_avatar(request.user)})
 
 @login_required
 def editar_pass(request):
@@ -70,21 +70,28 @@ def editar_pass(request):
             return render(request, "Musicy/Inicio.html", {"mensaje":"Error interno."})
     else:
         editform = f.EditPass(usuario,request.POST)
-    return render(request, "Users/UsuariosPass.html",{"formulario":editform,"usuario":usuario})
+    return render(request, "Users/UsuariosPass.html",{"formulario":editform,"usuario":usuario,"avatar":buscar_avatar(request.user)})
 
 
 @login_required
-def agregar_pic(request):
+def agregar_avatar(request):
     usuario = request.user
     if request.method == "POST":
         formularioPic = f.CargarPic(request.POST,request.FILES)
         if formularioPic.is_valid():
-            mod.Avatar.objects.filter(user=usuario).delete()
             usuariox = User.objects.get(username=usuario)
             Pic = mod.Avatar(user=usuariox, imagen=formularioPic.cleaned_data["imagen"])
+            mod.Avatar.objects.filter(user=usuario).delete()
             Pic.save()
             return render(request, "Users/UsuariosPic.html", {"mensaje":"La imagen se ha actualizado exitosamente."})
     else:
         formularioPic = f.CargarPic()
-    return render(request, "Users/UsuariosPic.html",{"formularioPic":formularioPic,"usuario":usuario})
+    return render(request, "Users/UsuariosPic.html",{"formularioPic":formularioPic,"usuario":usuario,"avatar":buscar_avatar(request.user)})
 
+def buscar_avatar(user):
+    try:
+        url = mod.Avatar.objects.get(user=user).imagen.url
+        return url
+    except:
+        url = "/media/avatar/logo.png"
+        return url
