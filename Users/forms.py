@@ -33,5 +33,5 @@ class EditPass(djf.SetPasswordForm):
         model = djf.User
         fields = ["new_password1","new_password2"]
 
-class CargarPic(forms.Form):
+class CargarAvatar(forms.Form):
     imagen = forms.ImageField()

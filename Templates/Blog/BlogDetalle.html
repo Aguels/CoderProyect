@@ -11,6 +11,7 @@
         </header> 
         <h1>{{object.titulo}}</h1>
         <h3>{{object.subtitulo}}</h3><br>
+        <img src="/media/{{object.imagen}}" alt="..." />
         <div>{{object.cuerpo|safe}}</div><br>
         Autor: <em>{{object.autor.last_name}}, {{object.autor.first_name}}</em><br><br>
         {% if user.is_authenticated %}

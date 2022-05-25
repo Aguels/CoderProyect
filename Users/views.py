@@ -77,16 +77,16 @@ def editar_pass(request):
 def agregar_avatar(request):
     usuario = request.user
     if request.method == "POST":
-        formularioPic = f.CargarPic(request.POST,request.FILES)
-        if formularioPic.is_valid():
+        formularioAvatar = f.CargarAvatar(request.POST,request.FILES)
+        if formularioAvatar.is_valid():
             usuariox = User.objects.get(username=usuario)
-            Pic = mod.Avatar(user=usuariox, imagen=formularioPic.cleaned_data["imagen"])
+            Avatar = mod.Avatar(user=usuariox, imagen=formularioAvatar.cleaned_data["imagen"])
             mod.Avatar.objects.filter(user=usuario).delete()
-            Pic.save()
-            return render(request, "Users/UsuariosPic.html", {"mensaje":"La imagen se ha actualizado exitosamente."})
+            Avatar.save()
+            return render(request, "Users/UsuariosAvatar.html", {"mensaje":"La imagen se ha actualizado exitosamente."})
     else:
-        formularioPic = f.CargarPic()
-    return render(request, "Users/UsuariosPic.html",{"formularioPic":formularioPic,"usuario":usuario,"avatar":buscar_avatar(request.user)})
+        formularioAvatar = f.CargarAvatar()
+    return render(request, "Users/UsuariosAvatar.html",{"formularioAvatar":formularioAvatar,"usuario":usuario,"avatar":buscar_avatar(request.user)})
 
 def buscar_avatar(user):
     try:
